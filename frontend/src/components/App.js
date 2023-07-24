@@ -277,7 +277,7 @@ function App() {
         setLoggedIn(true);
         getUserData();//запросили данные пользователя
         getCards();//запросили данные карточек с сервера
-        handleLogin(user.data);
+        handleLogin(user);
         //console.log(location);
         const path = location.pathname;
         //console.log(path);
