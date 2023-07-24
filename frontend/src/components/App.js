@@ -249,8 +249,10 @@ function App() {
       .then((data) => {
         //console.log(data);
         //alert('Авторизация прошла успешно')
-        getCards();
-        handleLogin(data);//после успешной авторизации передаем данные авторизировавшегося пользователя дальше
+
+        //getCards();
+        //handleLogin(data);//после успешной авторизации передаем данные авторизировавшегося пользователя дальше
+
         tockenCheck();
         /* if (data.token) {
           //console.log('получаем токен');
