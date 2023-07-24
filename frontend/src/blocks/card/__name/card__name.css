@@ -1,0 +1,15 @@
+.card__name {
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 246px;
+    position: relative;
+}
+@media screen and (max-width: 690px) {
+    .card__name {
+        max-width: 92vmax;
+        margin: 25px 0 0;
+        padding: 0 25px;
+    }
+}

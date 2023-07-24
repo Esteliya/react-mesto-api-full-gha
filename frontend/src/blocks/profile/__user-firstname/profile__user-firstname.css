@@ -1,0 +1,46 @@
+.profile__user-firstname {
+    margin: 0 18px 16px 0;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 114%;
+    max-width: 508px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 922px) {
+    .profile__user-firstname {
+    max-width: 303px;
+    }
+}
+@media screen and (max-width: 716px) {
+    .profile__user-firstname {
+        max-width: 450px;
+    }
+}
+@media screen and (max-width: 520px) {
+    .profile__user-firstname {
+        max-width: 40vmax;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+@media screen and (max-width: 410px) {
+    .profile__user-firstname {
+        font-size: 32px;
+        max-width: 30vmax;
+    }
+}
+@media screen and (max-width: 320px) {
+    .profile__user-firstname {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin: 0 auto;
+        font-size: 27px;
+        line-height: 33px;
+        text-align: center;
+    }
+}

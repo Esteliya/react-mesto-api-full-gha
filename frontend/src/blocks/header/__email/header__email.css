@@ -1,0 +1,9 @@
+.header__email {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    font-weight: 500;
+}
+.header__email:hover {
+    opacity: 0.6;
+}

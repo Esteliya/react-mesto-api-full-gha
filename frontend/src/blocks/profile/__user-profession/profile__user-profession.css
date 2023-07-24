@@ -1,0 +1,42 @@
+.profile__user-profession {
+    margin: 0;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 114%;
+    max-width: 508px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+@media screen and (max-width: 922px) {
+    .profile__user-profession {
+    max-width: 303px;
+    }
+}
+@media screen and (max-width: 716px) {
+    .profile__user-profession {
+        text-align: center;
+        margin-bottom: 36px;
+        max-width: 450px;
+    }
+}
+@media screen and (max-width: 520px) {
+    .profile__user-profession {
+        max-width: 40vmax;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+@media screen and (max-width: 410px) {
+    .profile__user-profession {
+        max-width: 30vmax;
+    }
+}
+@media screen and (max-width: 320px) {
+    .profile__user-profession {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

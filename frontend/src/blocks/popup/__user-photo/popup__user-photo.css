@@ -1,0 +1,6 @@
+.popup__user-photo {
+  display: block;
+  flex-direction: column;
+  margin: auto;
+  position: relative;
+}
