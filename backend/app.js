@@ -21,8 +21,9 @@ const app = express();
 
 const corsOptions = {
   origin: 'http://localhost:3001',
-  optionsSuccessStatus: 200,
-  methods: 'GET,PUT,POST,PATCH'
+  //optionsSuccessStatus: 200,
+  methods: ['GET','PUT','POST','PATCH','DELETE'],
+  credentials: true
 }
 
 app.use(cors(corsOptions));

@@ -240,17 +240,17 @@ function App() {
   //авторизируем пользователя 
   function handleAutorization(data) {
     const { email, password } = data;
-    const dataAuthUser = {//сохранили в объект данные из полей при авторизации —> используем после успешной авторизации
+    /* const dataAuthUser = {//сохранили в объект данные из полей при авторизации —> используем после успешной авторизации
       email: email,
       password: password
-    };
+    }; */
     //console.log(dataAuthUser);
     auth.authorize(email, password)
       .then((data) => {
         //console.log(data);
         //alert('Авторизация прошла успешно')
         getCards();
-        handleLogin(dataAuthUser);//после успешной авторизации передаем данные авторизировавшегося пользователя дальше
+        handleLogin(data);//после успешной авторизации передаем данные авторизировавшегося пользователя дальше
         tockenCheck();
         /* if (data.token) {
           //console.log('получаем токен');
