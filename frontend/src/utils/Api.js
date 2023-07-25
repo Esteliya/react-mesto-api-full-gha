@@ -3,7 +3,7 @@ import { apiSetting } from './customize.js';
 class Api {
   constructor(data) {
     this._url = data.url;//основная строка url из customize
-    //this._headers = data.headers;//заголовок fetch из customize
+    this._headers = data.headers;//заголовок fetch из customize
   }
   //проверяем ответ сервера
   _checkResponse(res) {
@@ -24,7 +24,7 @@ class Api {
   //запрашиваем данные
   getUserInfo() {
     return this._request('/users/me', {
-      //headers: this._headers,
+      headers: this._headers,
       credentials: 'include',
     })
   }
@@ -34,7 +34,7 @@ class Api {
     return this._request('/users/me', {
       method: 'PATCH',
       credentials: 'include',
-      //headers: this._headers,
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -45,7 +45,7 @@ class Api {
   //запрашиваем массив карточек с сервера
   getArrCards() {
     return this._request('/cards', {
-      //headers: this._headers,
+      headers: this._headers,
       credentials: 'include',
     })
   }
@@ -56,7 +56,7 @@ class Api {
     return this._request('/cards', {
       method: 'POST',
       credentials: 'include',
-      //headers: this._headers,
+      headers: this._headers,
       body: JSON.stringify(
         data,
       )
@@ -68,7 +68,7 @@ class Api {
     return this._request(`/cards/${cardId}`, {
       method: 'DELETE',
       credentials: 'include',
-      //headers: this._headers,
+      headers: this._headers,
     })
   }
 
@@ -77,7 +77,7 @@ class Api {
     return this._request('/users/me/avatar', {
       method: 'PATCH',
       credentials: 'include',
-      //headers: this._headers,
+      headers: this._headers,
       body: JSON.stringify(avatar),
     })
   }
@@ -87,7 +87,7 @@ class Api {
     return this._request(`/cards/${cardId}/likes`, {
       method: "PUT",
       credentials: 'include',
-      //headers: this._headers,
+      headers: this._headers,
     })
   }
 
@@ -96,7 +96,7 @@ class Api {
     return this._request(`/cards/${cardId}/likes`, {
       method: 'DELETE',
       credentials: 'include',
-      //headers: this._headers,
+      headers: this._headers,
     })
   }
 }
