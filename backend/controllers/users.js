@@ -7,7 +7,7 @@ const { JWT_SECRET = 'test-secret' } = process.env;
 // контроллер аутентификации
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  console.log(JWT_SECRET);
+  // console.log(JWT_SECRET);
   User.findOne({ email })
     .orFail(() => new Error('NotData'))
     // если email существует в базе —> пользователь в переменной user
@@ -26,11 +26,7 @@ const login = (req, res, next) => {
             );
             // записываем токен в httpOnly кук —> отправляем на фронт пользователя
             res.status(200).cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true, sameSite: true }).send(user);
-            console.log(token);
-            // передаем токен в теле ответа
-            //res.status(200).send({token});
-            //res.status(200).send(user.tasks);
-            //res.status(200).send(user);
+            // console.log(token);
           } else {
             // res.status(403).send({ message: 'Введены некорректные данные' });
             next(new Error('NotData'));

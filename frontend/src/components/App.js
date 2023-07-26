@@ -50,11 +50,7 @@ function App() {
   const handleLogin = ({ email }) => {
     setLoggedIn(true);//залогинились (правда)
     //console.log(email);
-    //console.log(data.email);
     //console.log(data);
-    //console.log(data.data);
-    //console.log(data.password);
-    //setUserInfo({ data });
     setUserEmail(email)
   }
   //контекст попапа оповещения хода регистрации
@@ -108,7 +104,7 @@ function App() {
     //console.log(card);
     const isLiked = card.likes.some(i => i === currentUser._id);
     if (!isLiked) {
-      console.log('лайк');
+      // console.log('лайк');
       api.putLike(card._id)
         .then((newCard) => {
           setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
@@ -118,7 +114,7 @@ function App() {
           console.error(`Ошибка: ${err}`);
         });
     } else {
-      console.log('дизлайк');
+      // console.log('дизлайк');
       //debugger;
       api.deleteLike(card._id)
         .then((newCard) => {
@@ -242,29 +238,10 @@ function App() {
   //авторизируем пользователя 
   function handleAutorization(data) {
     const { email, password } = data;
-    /* const dataAuthUser = {//сохранили в объект данные из полей при авторизации —> используем после успешной авторизации
-      email: email,
-      password: password
-    }; */
     //console.log(dataAuthUser);
     auth.authorize(email, password)
-      .then((data) => {
-        //console.log(data);
-        //alert('Авторизация прошла успешно')
-
-        //getCards();
-        //handleLogin(data);//после успешной авторизации передаем данные авторизировавшегося пользователя дальше
-
+      .then(() => {
         tockenCheck();
-        /* if (data.token) {
-          //console.log('получаем токен');
-          localStorage.setItem('jwt', data.token);
-          //console.log('записали данные токена в localStorage');
-          getCards();
-          handleLogin(dataAuthUser);//после успешной авторизации передаем данные авторизировавшегося пользователя дальше
-          //console.log(dataAuthUser);
-          tockenCheck();
-        } */
       })
       .catch((err) => {
         console.error(`Ошибка: ${err}`);
@@ -299,54 +276,14 @@ function App() {
       .catch((err) => {
         console.error(`Ошибка: ${err}`);
       });
-
-    //const jwt = localStorage.getItem('jwt');
-
-    /* if (jwt) {
-      auth.checkToken(jwt)
-        .then(user => {
-          //console.log('сравнили токен - есть');
-          setLoggedIn(true);
-          getUserData();//запросили данные пользователя
-          getCards();//запросили данные карточек с сервера
-          handleLogin(user.data);
-          //console.log(location);
-          const path = location.pathname;
-          //console.log(path);
-          switch (path) {//навигируем существующие роуты на карточки при авторизации, иначе 404 страница
-            case "/":
-              navigate('/');
-              break
-            case "/sign-in":
-              navigate('/');
-              break
-            case "/sign-up":
-              navigate('/');
-              break
-          }
-
-        })
-        .catch((err) => {
-          console.error(`Ошибка: ${err}`);
-        });
-    } else {
-      setLoggedIn(false);
-    } */
-
   }
 
   //удаляем токен - для кнопки ВЫХОД
   function handleExitProfile() {
     auth.logout()
-      .then(() => {
-        navigate("/sign-in");//перебрасываем на авторизацию - есть в link в Header
-        setLoggedIn(false);//незалогине
-      })
-    /* if (localStorage.getItem('jwt')) {
-      localStorage.removeItem("jwt");
-      navigate("/sign-in");//перебрасываем на авторизацию - есть в link в Header 
-      setLoggedIn(false);//незалогинен
-    } */
+    setUserEmail("");
+    // navigate("/sign-in");//перебрасываем на авторизацию - есть в link в Header
+    // setLoggedIn(false);//незалогинен
   }
 
   return (

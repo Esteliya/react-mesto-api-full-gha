@@ -42,7 +42,7 @@ class Api {
     })
   }
 
-  //запрашиваем массив карточек с сервера
+  // запрашиваем массив карточек с сервера
   getArrCards() {
     return this._request('/cards', {
       headers: this._headers,
@@ -50,9 +50,9 @@ class Api {
     })
   }
 
-  //создаем карточку пользователя -> отправляем данные на серввер
-  postUserCard(data) {//ждем объект
-    //debugger;
+  // создаем карточку пользователя -> отправляем данные на серввер
+  postUserCard(data) {// ждем объект
+    // debugger;
     return this._request('/cards', {
       method: 'POST',
       credentials: 'include',
@@ -63,7 +63,7 @@ class Api {
     })
   }
 
-  //удаляем карточку
+  // удаляем карточку
   deleteCard(cardId) {
     return this._request(`/cards/${cardId}`, {
       method: 'DELETE',
@@ -72,7 +72,7 @@ class Api {
     })
   }
 
-  //отправляем аватарку на сервер
+  // отправляем аватарку на сервер
   patchAvatar(avatar) {
     return this._request('/users/me/avatar', {
       method: 'PATCH',
@@ -82,7 +82,7 @@ class Api {
     })
   }
 
-  //добавляем лайк карточке
+  // добавляем лайк карточке
   putLike(cardId) {
     return this._request(`/cards/${cardId}/likes`, {
       method: "PUT",
@@ -91,7 +91,7 @@ class Api {
     })
   }
 
-  //удаляем лайк карточки
+  // удаляем лайк карточки
   deleteLike(cardId) {
     return this._request(`/cards/${cardId}/likes`, {
       method: 'DELETE',
@@ -101,8 +101,7 @@ class Api {
   }
 }
 
-//экземпляр класса Api с данными
+// экземпляр класса Api с данными
 const api = new Api(apiSetting);
-//ЭКСПОРТ
+// ЭКСПОРТ
 export default api;
-//export { Api };

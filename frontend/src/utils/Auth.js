@@ -1,7 +1,6 @@
-//const BASE_URL = 'https://auth.nomoreparties.co'
 const BASE_URL = 'http://localhost:3000'
 
-//проверяем ответ сервера
+// проверяем ответ сервера
 const response = (res) => {
     if (res.ok) {
         return res.json();
@@ -11,13 +10,7 @@ const response = (res) => {
 
 }
 
-/* //запрос проверки ответа НЕ РАБОТАЕТ - ПРОВЕРИТЬ!!!
-const request = (urlEndpoint, options) => {
-    return fetch(`${BASE_URL}${urlEndpoint}`, options)
-        .then(response);
-} */
-
-//регистрация пользователя 
+// регистрация пользователя 
 export const register = (email, password) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
@@ -58,14 +51,13 @@ export const logout = () => {
 
 //проверка пользователя
 export const checkToken = () => {
-    //debugger;
+    // debugger;
     return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            //'Authorization': `Bearer ${token}`,
         }
     })
         .then(response)
