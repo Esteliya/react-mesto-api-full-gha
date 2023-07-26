@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 // порт + БД в отдельной env переменной
 // создаем новую БД, т.к. не отрабатывает проверка email на уникальность. Теперь ок.
@@ -49,6 +50,8 @@ mongoose.connect(NODE_ENV === 'production' ? DB_PRODUCTION : DB_URL, {
 app.use(bodyParser.json());
 // подключаем cookie-parser (анализирует cookie и записывает данные в req.cookies)
 app.use(cookieParser());
+// подключаем логгер запросов
+app.use(requestLogger);
 
 // роут авторизации
 app.post(
@@ -86,6 +89,9 @@ app.use('/cards', cardRouter);
 app.use('/*', (req, res) => {
   res.status(404).send({ message: 'Страницы не существует' });
 });
+
+// подключаем логгер ошибок
+app.use(errorLogger);
 
 app.use(errors());
 // централизованный обработчик ошибок
