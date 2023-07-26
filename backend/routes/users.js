@@ -3,6 +3,7 @@ const router = require('express').Router();
 const {
   getUsers,
   getAuthUser,
+  getLogout,
   getUser,
   updateUser,
   updateAvatar,
@@ -12,6 +13,8 @@ const {
 router.get('/', getUsers);
 // роут запроса данных пользователя
 router.get('/me', getAuthUser);
+// роут вызода из аккаунта
+router.get('/logout', getLogout);
 // роут изменения данных пользователя
 router.patch(
   '/me',

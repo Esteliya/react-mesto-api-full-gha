@@ -89,6 +89,12 @@ const getAuthUser = (req, res, next) => {
     .catch(next);
 };
 
+// выходим из аккаунта
+const getLogout = (req, res, next) => {
+  res.status(202).clearCookie('jwt').send('cookie cleared');
+  next();
+};
+
 // запрашиваем пользователя по id
 const getUser = (req, res, next) => {
   const { id } = req.params;
@@ -132,4 +138,5 @@ module.exports = {
   updateUser,
   updateAvatar,
   login,
+  getLogout,
 };

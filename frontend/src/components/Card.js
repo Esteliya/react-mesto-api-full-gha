@@ -4,12 +4,12 @@ function Card(props) {
     //открываем zoom-popup по клику на картинку
     function handleCardClick() {
         onCardClick(card);
-        console.log(`currentUser._id: ${currentUser._id}`);
+        /* console.log(`currentUser._id: ${currentUser._id}`);
         console.log(`card: ${card}`);
         console.log(`card.owner._id: ${card.owner._id}`);
         console.log(`есть мой id?: ${currentUser._id === card.owner._id}`);
         console.log(`card.likes: ${card.likes}`);
-        console.log(`typeof card.likes: ${typeof card.likes}`);
+        console.log(`typeof card.likes: ${typeof card.likes}`); */
     }
 
     // Определяем, являемся ли мы владельцем текущей карточки
