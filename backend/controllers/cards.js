@@ -52,7 +52,7 @@ const deleteCard = (req, res, next) => {
 const likeCard = (req, res, next) => {
   const { id } = req.params;
   const idUser = req.user._id;
-  Card.findByIdAndUpdate(id, { $addToSet: { likes: idUser } }, { new: true })
+  Card.findByIdAndUpdate(id, { $addToSet: { likes: [idUser] } }, { new: true })
     .orFail(() => Error('NotValidId'))
     .then((card) => {
       res.send(card);

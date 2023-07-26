@@ -103,9 +103,10 @@ function App() {
 
   //ставим лайк 
   function handleCardLike(card) {
+    //debugger;
     //console.log('ставим лайк карточке');
     //console.log(card);
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     if (!isLiked) {
       console.log('лайк');
       api.putLike(card._id)
@@ -118,6 +119,7 @@ function App() {
         });
     } else {
       console.log('дизлайк');
+      //debugger;
       api.deleteLike(card._id)
         .then((newCard) => {
           setCards((state) => state.map((c) => c._id === card._id ? newCard : c));

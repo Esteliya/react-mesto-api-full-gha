@@ -4,12 +4,33 @@ function Card(props) {
     //открываем zoom-popup по клику на картинку
     function handleCardClick() {
         onCardClick(card);
+        console.log(`currentUser._id: ${currentUser._id}`);
+        console.log(`card: ${card}`);
+        console.log(`card.owner._id: ${card.owner._id}`);
+        console.log(`есть мой id?: ${currentUser._id === card.owner._id}`);
+        console.log(`card.likes: ${card.likes}`);
+        console.log(`typeof card.likes: ${typeof card.likes}`);
     }
 
     // Определяем, являемся ли мы владельцем текущей карточки
-    const isOwner = card.owner._id === currentUser._id;
+    const isOwner = (card.owner._id || card.owner) === currentUser._id;
     // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
+
+
+    //const isLiked = card.owner._id === currentUser._id;
+
+/*     function arrLikes() {
+        const arr = card.likes
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i]._id === currentUser._id) {
+                return true;
+            }
+        }
+        return false;
+    }
+    const isLiked = arrLikes; */
+
 
     //класс кнопки лайка
     const cardLikeButtonClassName = (
