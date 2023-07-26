@@ -337,11 +337,16 @@ function App() {
 
   //удаляем токен - для кнопки ВЫХОД
   function handleExitProfile() {
-    if (localStorage.getItem('jwt')) {
+    auth.logout()
+      .then(() => {
+        navigate("/sign-in");//перебрасываем на авторизацию - есть в link в Header
+        setLoggedIn(false);//незалогине
+      })
+    /* if (localStorage.getItem('jwt')) {
       localStorage.removeItem("jwt");
       navigate("/sign-in");//перебрасываем на авторизацию - есть в link в Header 
       setLoggedIn(false);//незалогинен
-    }
+    } */
   }
 
   return (

@@ -44,6 +44,18 @@ export const authorize = (email, password) => {
         .then(response)
 }
 
+//выход из аккуанта
+export const logout = () => {
+    return fetch(`${BASE_URL}/users/logout`, {
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(response)
+}
+
 //проверка пользователя
 export const checkToken = () => {
     //debugger;
