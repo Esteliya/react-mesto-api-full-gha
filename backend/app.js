@@ -53,6 +53,13 @@ app.use(cookieParser());
 // подключаем логгер запросов
 app.use(requestLogger);
 
+// роут краш-теста
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 // роут авторизации
 app.post(
   '/signin',
