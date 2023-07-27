@@ -1,6 +1,6 @@
 // настройки api
 const apiSetting = {
-  url: 'http://localhost:3000',
+  url: 'http://api.avroradis.students.nomoreparties.sbs',
   headers: {
     'Content-Type': 'application/json'
   },
