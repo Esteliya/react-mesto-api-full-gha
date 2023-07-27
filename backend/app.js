@@ -62,7 +62,7 @@ app.get('/crash-test', () => {
 
 // роут авторизации
 app.post(
-  '/signin',
+  '/api/signin',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
@@ -73,7 +73,7 @@ app.post(
 );
 // роут регистрации
 app.post(
-  '/signup',
+  '/api/signup',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
@@ -90,10 +90,10 @@ app.post(
 app.use(auth);
 
 // слушаем роуты
-app.use('/users', usersRouter);
-app.use('/cards', cardRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/cards', cardRouter);
 
-app.use('/*', (req, res) => {
+app.use('/api/*', (req, res) => {
   res.status(404).send({ message: 'Страницы не существует' });
 });
 
