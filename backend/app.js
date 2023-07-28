@@ -16,12 +16,16 @@ const {
   DB_PRODUCTION,
   PORT = 3000,
   DB_URL = 'mongodb://localhost:27017/mestodb_new',
+  // бэк???
+  // DB_URL = 'api.avroradis.students.nomoreparties.sbs',
 } = process.env;
 
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:3001',
+  origin: 'http://avroradis.students.nomoredomains.xyz',
+  // фронт
+  // origin: 'http://localhost:3001',
   methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
   credentials: true,
 };
@@ -62,7 +66,7 @@ app.get('/crash-test', () => {
 
 // роут авторизации
 app.post(
-  '/api/signin',
+  '/signin',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
@@ -73,7 +77,7 @@ app.post(
 );
 // роут регистрации
 app.post(
-  '/api/signup',
+  '/signup',
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
@@ -90,10 +94,10 @@ app.post(
 app.use(auth);
 
 // слушаем роуты
-app.use('/api/users', usersRouter);
-app.use('/api/cards', cardRouter);
+app.use('/users', usersRouter);
+app.use('/cards', cardRouter);
 
-app.use('/api/*', (req, res) => {
+app.use('/*', (req, res) => {
   res.status(404).send({ message: 'Страницы не существует' });
 });
 
