@@ -5,12 +5,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/Esteliya/react-mesto-api-full-gha/tree/main
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 51.250.83.178
 
-Frontend https://...
+Frontend https://avroradis.students.nomoredomains.xyz
 
-Backend https://...
+Backend https://api.avroradis.students.nomoreparties.sbs
