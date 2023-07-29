@@ -109,19 +109,19 @@ app.use(errors());
 // централизованный обработчик ошибок
 app.use((err, req, res, next) => {
   if (err.message === 'NotValidId') {
-    res.status(404).send({ message: 'Запрошены несуществующие данные' });
+    return res.status(404).send({ message: 'Запрошены несуществующие данные' });
   } else if (err.message === 'NotData') {
-    res.status(401).send({ message: 'Пользователя с таким email или паролем не существует' });
+    return res.status(401).send({ message: 'Пользователя с таким email или паролем не существует' });
   } else if (err.name === 'ValidationError' || err.name === 'CastError') {
-    res.status(400).send({ message: 'Введены некорректные данные' });
+    return res.status(400).send({ message: 'Введены некорректные данные' });
   } else if (err.status === 403) {
-    res.status(403).send({ message: 'Введены некорректные данные' });
+    return  res.status(403).send({ message: 'Введены некорректные данные' });
   } else if (err.code === 11000) {
-    res.status(409).send({ message: 'Пользователь с таким email уже зарегистрирован' });
+    return res.status(409).send({ message: 'Пользователь с таким email уже зарегистрирован' });
   } else if (err.status === 500) {
-    res.status(500).send({ message: 'На сервере произошла ошибка' });
+    return res.status(500).send({ message: 'На сервере произошла ошибка' });
   } else {
-    res.status(err.status).send({ message: err.message });
+    return res.status(err.status).send({ message: err.message });
   }
   next();
 });
