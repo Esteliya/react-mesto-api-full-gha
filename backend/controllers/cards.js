@@ -14,7 +14,10 @@ const createCard = (req, res, next) => {
     .then((card) => {
       res.status(201).send(card);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // запрашиваем все карточки
@@ -24,7 +27,10 @@ const getCards = (req, res, next) => {
     .then((card) => {
       res.send(card);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // удаляем карточку по id
@@ -45,7 +51,10 @@ const deleteCard = (req, res, next) => {
           });
       }
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // ставим лайк карточке
@@ -57,7 +66,10 @@ const likeCard = (req, res, next) => {
     .then((card) => {
       res.send(card);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // удаляем лайк карточки
@@ -69,7 +81,10 @@ const deleteLikeCard = (req, res, next) => {
     .then((card) => {
       res.send(card);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // экспорт

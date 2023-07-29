@@ -33,7 +33,10 @@ const login = (req, res, next) => {
           }
         });
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // создаем пользователя
@@ -62,7 +65,10 @@ const createUser = (req, res, next) => {
     .then((user) => {
       res.status(201).send(user);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // запрашиваем список всех пользователей
@@ -71,7 +77,10 @@ const getUsers = (req, res, next) => {
     .then((users) => {
       res.send(users);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // заправшиваем авторизированного пользователя
@@ -82,7 +91,10 @@ const getAuthUser = (req, res, next) => {
     .then((user) => {
       res.send(user);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // выходим из аккаунта
@@ -99,7 +111,10 @@ const getUser = (req, res, next) => {
     .then((user) => {
       res.send(user);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // обновляем данные пользователя
@@ -111,7 +126,10 @@ const updateUser = (req, res, next) => {
     .then((user) => {
       res.send(user);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 // обновляем аватар пользователя
@@ -123,7 +141,10 @@ const updateAvatar = (req, res, next) => {
     .then((user) => {
       res.send(user);
     })
-    .catch(next);
+    // .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
 module.exports = {
