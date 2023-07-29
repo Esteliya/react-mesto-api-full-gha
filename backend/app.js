@@ -26,11 +26,7 @@ const app = express();
 const corsOptions = {
   origin: [
     'https://avroradis.students.nomoredomains.xyz',
-    'https://avroradis.students.nomoredomains.xyz/',
-    'https://localhost:3000',
-    'https://localhost:3000/',
-    'https://localhost:3001',
-    'https://localhost:3001/',
+    'http://localhost:3000',
   ],
   // фронт
   // origin: 'http://localhost:3001',
