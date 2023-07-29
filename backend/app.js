@@ -15,8 +15,8 @@ const {
   NODE_ENV = 'development',
   DB_PRODUCTION,
   PORT = 3000,
-  DB_URL = 'mongodb://localhost:27017/mestodb_new',
-  // DB_URL = 'mongodb://127.0.0.1:27017/mestodb_new',
+  //DB_URL = 'mongodb://localhost:27017/mestodb_new',
+  DB_URL = 'mongodb://127.0.0.1:27017/mestodb_new',
   // бэк???
   // DB_URL = 'api.avroradis.students.nomoreparties.sbs',
 } = process.env;
@@ -24,7 +24,14 @@ const {
 const app = express();
 
 const corsOptions = {
-  origin: 'http://avroradis.students.nomoredomains.xyz',
+  origin: [
+    'http://avroradis.students.nomoredomains.xyz',
+    'http://avroradis.students.nomoredomains.xyz/',
+    'http://localhost:3000',
+    'http://localhost:3000/',
+    'http://localhost:3001',
+    'http://localhost:3001/',
+  ],
   // фронт
   // origin: 'http://localhost:3001',
   methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
