@@ -27,6 +27,7 @@ const corsOptions = {
   origin: [
     'https://avroradis.students.nomoredomains.xyz',
     'http://localhost:3000',
+    'http://localhost:3001',
   ],
   // фронт
   // origin: 'http://localhost:3001',
