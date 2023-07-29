@@ -15,7 +15,7 @@ const {
   NODE_ENV = 'development',
   DB_PRODUCTION,
   PORT = 3000,
-  //DB_URL = 'mongodb://localhost:27017/mestodb_new',
+  // DB_URL = 'mongodb://localhost:27017/mestodb_new',
   DB_URL = 'mongodb://127.0.0.1:27017/mestodb_new',
   // бэк???
   // DB_URL = 'api.avroradis.students.nomoreparties.sbs',
@@ -116,19 +116,19 @@ app.use(errors());
 // централизованный обработчик ошибок
 app.use((err, req, res, next) => {
   if (err.message === 'NotValidId') {
-    return res.status(404).send({ message: 'Запрошены несуществующие данные' });
+    res.status(404).send({ message: 'Запрошены несуществующие данные' });
   } else if (err.message === 'NotData') {
-    return res.status(401).send({ message: 'Пользователя с таким email или паролем не существует' });
+    res.status(401).send({ message: 'Пользователя с таким email или паролем не существует' });
   } else if (err.name === 'ValidationError' || err.name === 'CastError') {
-    return res.status(400).send({ message: 'Введены некорректные данные' });
+    res.status(400).send({ message: 'Введены некорректные данные' });
   } else if (err.status === 403) {
-    return  res.status(403).send({ message: 'Введены некорректные данные' });
+    res.status(403).send({ message: 'Введены некорректные данные' });
   } else if (err.code === 11000) {
-    return res.status(409).send({ message: 'Пользователь с таким email уже зарегистрирован' });
+    res.status(409).send({ message: 'Пользователь с таким email уже зарегистрирован' });
   } else if (err.status === 500) {
-    return res.status(500).send({ message: 'На сервере произошла ошибка' });
+    res.status(500).send({ message: 'На сервере произошла ошибка' });
   } else {
-    return res.status(err.status).send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
   next();
 });
