@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес <51.250.83.178>
+IP 51.250.83.178
 
 Frontend https://avroradis.students.nomoredomains.xyz
 
