@@ -25,7 +25,7 @@ const login = (req, res, next) => {
               { expiresIn: '7d' },
             );
             // записываем токен в httpOnly кук —> отправляем на фронт пользователя
-            res.status(200).cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true }).send(user);
+            res.status(200).cookie('jwt', token, { maxAge: 3600000 * 24 * 7, sameSite: 'None', secure: true, httpOnly: true }).send(user);
             // опция sameSite: true под вопросом
             // console.log(token);
           } else {
