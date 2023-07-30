@@ -41,10 +41,10 @@ app.use(cors(corsOptions));
 app.use(helmet());
 
 // разрешаем сложные запросы с другого домена
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://avroradis.students.nomoredomains.xyz');
   next();
-});
+}); */
 
 // роуты
 const usersRouter = require('./routes/users');
