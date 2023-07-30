@@ -25,8 +25,12 @@ const login = (req, res, next) => {
               { expiresIn: '7d' },
             );
             // записываем токен в httpOnly кук —> отправляем на фронт пользователя
-            res.status(200).cookie('jwt', token, { maxAge: 3600000 * 24 * 7, sameSite: 'None', secure: true, httpOnly: true }).send(user);
-            // опция sameSite: true под вопросом
+            res.status(200).cookie('jwt', token, {
+              maxAge: 3600000 * 24 * 7,
+              sameSite: 'None',
+              secure: true,
+              httpOnly: true,
+            }).send(user);
             // console.log(token);
           } else {
             // res.status(403).send({ message: 'Введены некорректные данные' });
