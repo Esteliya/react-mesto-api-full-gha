@@ -40,6 +40,12 @@ app.use(cors(corsOptions));
 // защищаем приложение, применяя библиотеку Helmet (установка: npm i helmet)
 app.use(helmet());
 
+// разрешаем сложные запросы с другого домена
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://avroradis.students.nomoredomains.xyz');
+  next();
+});
+
 // роуты
 const usersRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
