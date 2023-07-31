@@ -245,6 +245,8 @@ function App() {
       })
       .catch((err) => {
         console.error(`Ошибка: ${err}`);
+        setResult(false)
+        setShowInfoToolTip(true)
       });
   }
 

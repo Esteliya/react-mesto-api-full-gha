@@ -1,6 +1,6 @@
-const BASE_URL = 'https://api.avroradis.students.nomoreparties.sbs'
+// const BASE_URL = 'https://api.avroradis.students.nomoreparties.sbs'
 // бэк
-// const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'http://localhost:3000'
 
 // проверяем ответ сервера
 const response = (res) => {
