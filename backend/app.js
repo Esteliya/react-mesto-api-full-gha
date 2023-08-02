@@ -18,8 +18,6 @@ const {
   PORT = 3000,
   // DB_URL = 'mongodb://localhost:27017/mestodb_new',
   DB_URL = 'mongodb://127.0.0.1:27017/mestodb_new',
-  // бэк???
-  // DB_URL = 'api.avroradis.students.nomoreparties.sbs',
 } = process.env;
 
 const app = express();
@@ -40,12 +38,6 @@ app.use(cors(corsOptions));
 
 // защищаем приложение, применяя библиотеку Helmet (установка: npm i helmet)
 app.use(helmet());
-
-// разрешаем сложные запросы с другого домена
-/* app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://avroradis.students.nomoredomains.xyz');
-  next();
-}); */
 
 // роуты
 const usersRouter = require('./routes/users');
@@ -119,24 +111,6 @@ app.use(errorLogger);
 app.use(errors());
 // централизованный обработчик ошибок
 app.use(errorHandler);
-/* app.use((err, req, res, next) => {
-  if (err.message === 'NotValidId') {
-    res.status(404).send({ message: 'Запрошены несуществующие данные' });
-  } else if (err.message === 'NotData') {
-    res.status(401).send({ message: 'Пользователя с таким email или паролем не существует' });
-  } else if (err.name === 'ValidationError' || err.name === 'CastError') {
-    res.status(400).send({ message: 'Введены некорректные данные' });
-  } else if (err.status === 403) {
-    res.status(403).send({ message: 'Введены некорректные данные' });
-  } else if (err.code === 11000) {
-    res.status(409).send({ message: 'Пользователь с таким email уже зарегистрирован' });
-  } else if (err.status === 500) {
-    res.status(500).send({ message: 'На сервере произошла ошибка' });
-  } else {
-    res.status(err.status).send({ message: err.message });
-  }
-  next();
-}); */
 
 app.listen(PORT, () => {
   console.log(`Сервер запущен на ${PORT} порту`);

@@ -12,7 +12,6 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   // console.log(JWT_SECRET);
   User.findOne({ email })
-    // .orFail(() => new Error('NotData'))
     .orFail(new ErrorAuth('Пользователя с таким email или паролем не существует'))
     // если email существует в базе —> пользователь в переменной user
     .then((user) => {
@@ -37,15 +36,11 @@ const login = (req, res, next) => {
             }).send(user);
             // console.log(token);
           } else {
-            // res.status(403).send({ message: 'Введены некорректные данные' });
             next(new ErrorAuth('Пользователя с таким email или паролем не существует'));
           }
         });
     })
     .catch(next);
-  /* .catch((err) => {
-    next(err);
-  }); */
 };
 
 // создаем пользователя
@@ -57,13 +52,9 @@ const createUser = (req, res, next) => {
     email,
     password,
   } = req.body;
-  // проверяем, заполнены ли поля создания пользователя
-  /*   if (!email || !password) {
-      res.status(400).send({ message: 'Обязательные поля не заполнены' });
-      return;
-    } */
+
   // если указанная почта уже есть в базе — ошибка
-  User.findOne({ email })
+  User.findOne({ email });
   if (email) {
     next(new ErrorConflict('Пользователь с таким email уже зарегистрирован'));
   }
@@ -80,9 +71,6 @@ const createUser = (req, res, next) => {
       res.status(201).send(user);
     })
     .catch(next);
-  /*  .catch((err) => {
-     next(err);
-   }); */
 };
 
 // запрашиваем список всех пользователей
@@ -93,9 +81,6 @@ const getUsers = (req, res, next) => {
       res.send(users);
     })
     .catch(next);
-  /*  .catch((err) => {
-     next(err);
-   }); */
 };
 
 // заправшиваем авторизированного пользователя
@@ -107,9 +92,6 @@ const getAuthUser = (req, res, next) => {
       res.send(user);
     })
     .catch(next);
-  /* .catch((err) => {
-    next(err);
-  }); */
 };
 
 // выходим из аккаунта
@@ -132,10 +114,7 @@ const getUser = (req, res, next) => {
     .then((user) => {
       res.send(user);
     })
-    // .catch(next);
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
 
 // обновляем данные пользователя
@@ -148,9 +127,6 @@ const updateUser = (req, res, next) => {
       res.send(user);
     })
     .catch(next);
-  /* .catch((err) => {
-    next(err);
-  }); */
 };
 
 // обновляем аватар пользователя
@@ -163,9 +139,6 @@ const updateAvatar = (req, res, next) => {
       res.send(user);
     })
     .catch(next);
-  /*     .catch((err) => {
-        next(err);
-      }); */
 };
 
 module.exports = {

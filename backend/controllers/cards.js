@@ -7,20 +7,11 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user._id;// id пользователя
 
-  // проверяем, заполнены ли поля карточки
-  /*   if (!name || !link) {
-      res.status(400).send({ message: 'Обязательные поля не заполнены' });
-      return;
-    } */
   Card.create({ name, link, owner })
-
     .then((card) => {
       res.status(201).send(card);
     })
     .catch(next);
-  /* .catch((err) => {
-    next(err);
-  }); */
 };
 
 // запрашиваем все карточки
@@ -31,9 +22,6 @@ const getCards = (req, res, next) => {
       res.send(card);
     })
     .catch(next);
-  /* .catch((err) => {
-    next(err);
-  }); */
 };
 
 // удаляем карточку по id
@@ -45,7 +33,6 @@ const deleteCard = (req, res, next) => {
       // карточка пользователя?
       // нет - удаление невозможно
       if (req.user._id !== card.owner.toString()) {
-        // res.status(403).send({ message: 'У вас нет прав на удалениие данной карточки' });
         next(new ErrorForbidden('У вас нет прав на удалениие данной карточки'));
       } else {
         // если да, то удаляем карточку
@@ -56,9 +43,6 @@ const deleteCard = (req, res, next) => {
       }
     })
     .catch(next);
-  /* .catch((err) => {
-    next(err);
-  }); */
 };
 
 // ставим лайк карточке
@@ -71,9 +55,6 @@ const likeCard = (req, res, next) => {
       res.send(card);
     })
     .catch(next);
-  /* .catch((err) => {
-    next(err);
-  }); */
 };
 
 // удаляем лайк карточки
@@ -86,9 +67,6 @@ const deleteLikeCard = (req, res, next) => {
       res.send(card);
     })
     .catch(next);
-  /* .catch((err) => {
-    next(err);
-  }); */
 };
 
 // экспорт
