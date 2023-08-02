@@ -8,6 +8,7 @@ const { celebrate, Joi, errors } = require('celebrate');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const errorHandler = require('./middlewares/errorHandler');
 
 // порт + БД в отдельной env переменной
 // создаем новую БД, т.к. не отрабатывает проверка email на уникальность. Теперь ок.
@@ -117,7 +118,8 @@ app.use(errorLogger);
 
 app.use(errors());
 // централизованный обработчик ошибок
-app.use((err, req, res, next) => {
+app.use(errorHandler);
+/* app.use((err, req, res, next) => {
   if (err.message === 'NotValidId') {
     res.status(404).send({ message: 'Запрошены несуществующие данные' });
   } else if (err.message === 'NotData') {
@@ -134,7 +136,7 @@ app.use((err, req, res, next) => {
     res.status(err.status).send({ message: err.message });
   }
   next();
-});
+}); */
 
 app.listen(PORT, () => {
   console.log(`Сервер запущен на ${PORT} порту`);

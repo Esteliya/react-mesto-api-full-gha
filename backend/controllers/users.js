@@ -1,6 +1,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const ErrorAuth = require('../errors/ErrorAuth');// 401
+const ErrorConflict = require('../errors/ErrorConflict');// 409
+const ErrorNotFound = require('../errors/ErrorNotFound');// 404
 // достаем секретный ключ в отдельной env переменной, либо альтернативный, если нет .env
 const { JWT_SECRET = 'test-secret' } = process.env;
 
@@ -9,7 +12,8 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   // console.log(JWT_SECRET);
   User.findOne({ email })
-    .orFail(() => new Error('NotData'))
+    // .orFail(() => new Error('NotData'))
+    .orFail(new ErrorAuth('Пользователя с таким email или паролем не существует'))
     // если email существует в базе —> пользователь в переменной user
     .then((user) => {
       // проверяем пароль
@@ -34,14 +38,14 @@ const login = (req, res, next) => {
             // console.log(token);
           } else {
             // res.status(403).send({ message: 'Введены некорректные данные' });
-            next(new Error('NotData'));
+            next(new ErrorAuth('Пользователя с таким email или паролем не существует'));
           }
         });
     })
-    // .catch(next);
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
+  /* .catch((err) => {
+    next(err);
+  }); */
 };
 
 // создаем пользователя
@@ -54,9 +58,14 @@ const createUser = (req, res, next) => {
     password,
   } = req.body;
   // проверяем, заполнены ли поля создания пользователя
-  if (!email || !password) {
-    res.status(400).send({ message: 'Обязательные поля не заполнены' });
-    return;
+  /*   if (!email || !password) {
+      res.status(400).send({ message: 'Обязательные поля не заполнены' });
+      return;
+    } */
+  // если указанная почта уже есть в базе — ошибка
+  User.findOne({ email })
+  if (email) {
+    next(new ErrorConflict('Пользователь с таким email уже зарегистрирован'));
   }
   // хэшируем пароль
   bcrypt.hash(password, 10)
@@ -70,41 +79,48 @@ const createUser = (req, res, next) => {
     .then((user) => {
       res.status(201).send(user);
     })
-    // .catch(next);
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
+  /*  .catch((err) => {
+     next(err);
+   }); */
 };
 
 // запрашиваем список всех пользователей
 const getUsers = (req, res, next) => {
   User.find({})
+    .orFail(new ErrorNotFound('Пользователя не существует'))
     .then((users) => {
       res.send(users);
     })
-    // .catch(next);
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
+  /*  .catch((err) => {
+     next(err);
+   }); */
 };
 
 // заправшиваем авторизированного пользователя
 const getAuthUser = (req, res, next) => {
   const id = req.user._id;
   User.findById(id)
-    .orFail(() => Error('NotValidId'))
+    .orFail(new ErrorNotFound('Пользователя не существует'))
     .then((user) => {
       res.send(user);
     })
-    // .catch(next);
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
+  /* .catch((err) => {
+    next(err);
+  }); */
 };
 
 // выходим из аккаунта
 const getLogout = (req, res, next) => {
-  res.status(202).clearCookie('jwt').send('cookie cleared');
+  res
+    .status(202).clearCookie('jwt', {
+      sameSite: 'None',
+      secure: true,
+      httpOnly: true,
+    })
+    .send('cookie cleared');
   next();
 };
 
@@ -112,7 +128,7 @@ const getLogout = (req, res, next) => {
 const getUser = (req, res, next) => {
   const { id } = req.params;
   User.findById(id)
-    .orFail(() => Error('NotValidId'))
+    .orFail(new ErrorNotFound('Пользователя не существует'))
     .then((user) => {
       res.send(user);
     })
@@ -127,14 +143,14 @@ const updateUser = (req, res, next) => {
   const id = req.user._id;
   const { name, about } = req.body;
   User.findByIdAndUpdate(id, { name, about }, { new: true, runValidators: true })
-    .orFail(() => Error('NotValidId'))
+    .orFail(new ErrorNotFound('Ошибка валидации'))
     .then((user) => {
       res.send(user);
     })
-    // .catch(next);
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
+  /* .catch((err) => {
+    next(err);
+  }); */
 };
 
 // обновляем аватар пользователя
@@ -142,14 +158,14 @@ const updateAvatar = (req, res, next) => {
   const id = req.user._id;
   const { avatar } = req.body;
   User.findByIdAndUpdate(id, { avatar }, { new: true })
-    .orFail(() => Error('NotValidId'))
+    .orFail(new ErrorNotFound('Ошибка валидации'))
     .then((user) => {
       res.send(user);
     })
-    // .catch(next);
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
+  /*     .catch((err) => {
+        next(err);
+      }); */
 };
 
 module.exports = {
