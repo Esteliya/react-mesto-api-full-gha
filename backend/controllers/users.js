@@ -53,11 +53,6 @@ const createUser = (req, res, next) => {
     password,
   } = req.body;
 
-  // если указанная почта уже есть в базе — ошибка
-  User.findOne({ email });
-  if (email) {
-    next(new ErrorConflict('Пользователь с таким email уже зарегистрирован'));
-  }
   // хэшируем пароль
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
