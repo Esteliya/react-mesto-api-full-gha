@@ -1,9 +1,7 @@
 const Card = require('../models/card');
 const ErrorNotFound = require('../errors/ErrorNotFound');// 404
 const ErrorForbidden = require('../errors/ErrorForbidden');// 403
-const ErrorAuth = require('../errors/ErrorAuth');// 401
 const ErrorBadRequest = require('../errors/ErrorBadRequest');// 400
-const ErrorConflict = require('../errors/ErrorConflict');// 409
 
 // создаем карточку
 const createCard = (req, res, next) => {

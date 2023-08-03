@@ -37,7 +37,7 @@ const login = (req, res, next) => {
             }).send(user);
             // console.log(token);
           } else {
-            next(err);
+            next();
           }
         });
     })
@@ -54,7 +54,7 @@ const createUser = (req, res, next) => {
     password,
   } = req.body;
 
-  User.findOne({ email })
+  User.findOne({ email });
   // хэшируем пароль
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
