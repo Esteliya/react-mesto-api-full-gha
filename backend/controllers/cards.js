@@ -7,7 +7,6 @@ const ErrorBadRequest = require('../errors/ErrorBadRequest');// 400
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
   const owner = req.user._id;// id пользователя
-
   Card.create({ name, link, owner })
     .then((card) => {
       res.status(201).send(card);

@@ -9,6 +9,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
+const ErrorNotFound = require('./errors/ErrorNotFound');
 
 // порт + БД в отдельной env переменной
 // создаем новую БД, т.к. не отрабатывает проверка email на уникальность. Теперь ок.
@@ -101,8 +102,8 @@ app.use(auth);
 app.use('/users', usersRouter);
 app.use('/cards', cardRouter);
 
-app.use('/*', (req, res) => {
-  res.status(404).send({ message: 'Страницы не существует' });
+app.use('/*', (req, res, next) => {
+  next(new ErrorNotFound('Ой! Такой страницы не существует!'));
 });
 
 // подключаем логгер ошибок
